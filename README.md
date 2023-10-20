@@ -8,3 +8,4 @@ Solutions to several operating systems courses
 | lab name                       | project name                   | code                                                        |
 |--------------------------------|--------------------------------|-------------------------------------------------------------|
 | 1a unix utilities              | wcat                           | [code](CS-537/1a-unix-utilities/wcat)                       |
+| 1a unix utilities              | wgrep                          | [code](CS-537/1a-unix-utilities/wgrep)                      |
