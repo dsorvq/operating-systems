@@ -25,7 +25,7 @@ void RLE(char* str, bool forse_print) {
       ++counter;
       ++str;
     }
-    if (*str) {
+    if (*str != '\0') {
       put_int_dump(counter);
       putchar(c);
       counter = 0;
@@ -35,6 +35,7 @@ void RLE(char* str, bool forse_print) {
       put_int_dump(counter);
       putchar(c);
       counter = 0;
+      c = '\0';
   }
 }
 
@@ -44,7 +45,8 @@ int main(int argc, char* argv[]) {
     exit(1);
   }
 
-  const int buffer_size = 1024;  
+  char* line = NULL;
+  size_t line_size = 0;
 
   for (int i = 1; i < argc; ++i) {
     FILE* file = fopen(argv[i], "r");
@@ -53,15 +55,15 @@ int main(int argc, char* argv[]) {
       exit(1);
     }
 
-    char buffer[buffer_size];
-    while (fgets(buffer, buffer_size, file)) {
-      if (i == argc - 1) {
-        RLE(buffer, true);
-      } else {
-        RLE(buffer, false);
-      }
+    while (getline(&line, &line_size, file) > 0) {
+      RLE(line, false);
+    }
+    if (i == argc - 1) {
+      RLE("", true);
     }
   }
+
+  free(line);
 
   return 0;
 }
